@@ -7,12 +7,17 @@ import NameInput from './components/NameInput';
 
 export default function App() {
   const [namesList, setNameInListNames] = useState([]);
-
+  console.log(namesList)
   const addNameHandler = (name) => {
     if(name !== ""){
       setNameInListNames([...namesList, { key: Math.random().toString(), value: name }]);
     }
+  }
 
+  const removeNameHandler = nameID => {
+    setNameInListNames(currentName => {
+      return currentName.filter((name) => name.key !== nameID);
+    })
   }
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -21,10 +26,9 @@ export default function App() {
       <StatusBar style="auto" />
       <FlatList
         data={namesList}
-        renderItem={itemData => <NameItem name={itemData.item.value} />}
+        renderItem={itemData => <NameItem id={itemData.item.key} name={itemData.item.value} onDelete={removeNameHandler} />}
         showsHorizontalScrollIndicator={false}
       />
-
     </View>
     </TouchableWithoutFeedback>
   );

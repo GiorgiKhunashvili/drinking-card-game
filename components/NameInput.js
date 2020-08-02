@@ -17,9 +17,9 @@ const NameInput = (props) => {
                 style={styles.input}
                 onChangeText={nameInputHandler}
                 value={enteredName}
-                onEndEditing={() => {
-                    props.onAddName(enteredName);
-                }}
+                // onEndEditing={() => {
+                //     props.onAddName(enteredName);
+                // }}
             />
             <Button title="ADD" onPress={() => {
                 props.onAddName(enteredName);

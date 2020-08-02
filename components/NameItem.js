@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 const NameItem = (props) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.onDelete(props.id)}>
             <View style={styles.listItem}>
                 <Text style={styles.text}>{props.name}</Text>
             </View>
