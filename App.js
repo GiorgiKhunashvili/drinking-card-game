@@ -1,71 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, TouchableWithoutFeedback, Keyboard } from 'react-native';
+
+import NameItem from './components/NameItem';
+import NameInput from './components/NameInput';
 
 export default function App() {
-  const [enteredName, setEnteredName] = useState('');
   const [namesList, setNameInListNames] = useState([]);
 
+  const addNameHandler = (name) => {
+    if(name !== ""){
+      setNameInListNames([...namesList, { key: Math.random().toString(), value: name }]);
+    }
 
-  const nameInputHandler = (enteredText) => {
-    setEnteredName(enteredText)
   }
-
-  const addNameHandler = () => {
-    setNameInListNames([...namesList, { key: Math.random().toString(), value: enteredName }]);
-  }
-
   return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     <View style={styles.screen}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          autoCapitalize="none"
-          autoCorrect={false}        
-          placeholder="Course Goal"
-          style={styles.input}
-          onChangeText={nameInputHandler}
-          value={enteredName}
-          onEndEditing={addNameHandler}
-        />
-        <Button title="ADD" onPress={addNameHandler} />
-        <StatusBar style="auto" />
-      </View>
+      <NameInput onAddName={addNameHandler} />
+      <StatusBar style="auto" />
       <FlatList
-
         data={namesList}
-        renderItem={itemData => (
-          <View style={styles.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        renderItem={itemData => <NameItem name={itemData.item.value} />}
         showsHorizontalScrollIndicator={false}
       />
 
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
     padding: 50,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-
-  },
-  input: {
-    width: "70%",
-    borderBottomColor: "black",
-    borderBottomWidth: 1,
-    margin: 10
-  },
-  listItem: {
-    padding: 10, 
-    backgroundColor: '#ccc',
-    borderColor: "black",
-    borderWidth: 1,
-    marginVertical: 10,
-    borderRadius:4
+    height: "100%",
+    width: "100%"
   }
 });
