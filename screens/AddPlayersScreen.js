@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
+
 import { StyleSheet, View, Text, FlatList, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+
 
 import NameItem from '../components/NameItem';
 import NameInput from '../components/NameInput';
@@ -42,10 +44,12 @@ const AddPlayers = () =>  {
         renderItem={itemData => <NameItem id={itemData.item.key} name={itemData.item.value} onNameChange={editNameHandler} onDelete={removeNameHandler} />}
         showsHorizontalScrollIndicator={false}
       />
+
       <TouchableOpacity style={styles.startGameContainer}>
           <Text style={styles.startGameText}>Start Game</Text>
           <AntDesign name="rocket1" size={50} color="black" />
       </TouchableOpacity>
+
     </View>
     </TouchableWithoutFeedback>
   );
@@ -53,6 +57,7 @@ const AddPlayers = () =>  {
 
 const styles = StyleSheet.create({
   screen: {
+
     paddingHorizontal: 50,
     paddingVertical: 20,
     height: "100%",
