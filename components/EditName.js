@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, View, StyleSheet, Modal, Button } from 'react-native';
+import { TextInput, View, Text, StyleSheet, Modal, Button, TouchableOpacity } from 'react-native';
 
 
 const EditName = (props) => {
@@ -8,17 +8,25 @@ const EditName = (props) => {
     return (
         <Modal visible={props.visable} animationType="slide">
             <View style={styles.viewConainer}>
+                <Text style={styles.screenTitle}>Change Player Name</Text>
                 <TextInput
+                    autoCapitalize="none"
+                    autoCorrect={false}     
                     style={styles.nameEditInput}
                     placeholder="edit name"
                     onChangeText={(newName) => setChangedName(newName)}
                     value={name}
                 />
-                <Button title="Edit" onPress={() => {
+                <TouchableOpacity onPress={() => {
                     props.onNameChange(props.id, name);
                     props.onCloseModal();
-                }} />
-                <Button title="Close" onPress={() => props.onCloseModal()} />
+                }}>
+                    <Text style={styles.editButton}>Edit</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.onCloseModal()}>
+                    <Text style={styles.closeButton}>Close</Text>
+                </TouchableOpacity>
+
             </View>
         </Modal>
     )
@@ -31,13 +39,27 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     nameEditInput: {
-        height: 50,
+        height: 60,
         width: "70%",
         borderBottomWidth: 1,
-        fontSize: 20
+        fontSize: 40,
+        textAlign: "center"
+    },
+    closeButton: {
+        fontSize: 30,
+        color: "red"
+    },
+    editButton: {
+        fontSize: 30,
+        color: "#1d3ed1",
+        marginTop: 10,
+        marginBottom: 5
+    }, 
+    screenTitle: {
+        fontSize: 35,
 
+        color: "black"
     }
-
 });
 
 
