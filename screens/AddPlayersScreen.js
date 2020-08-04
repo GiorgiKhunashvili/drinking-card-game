@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 
 import { StyleSheet, View, Text, FlatList, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-
+import { withNavigation } from 'react-navigation';
 
 import NameItem from '../components/NameItem';
 import NameInput from '../components/NameInput';
 
-const AddPlayers = () =>  {
+const AddPlayers = ({ navigation }) =>  {
   const [namesList, setNameInListNames] = useState([]);
-  console.log(namesList)
+
   const addNameHandler = (name) => {
     if(name !== ""){
       setNameInListNames([...namesList, { key: Math.random().toString(), value: name }]);
@@ -45,7 +45,7 @@ const AddPlayers = () =>  {
         showsHorizontalScrollIndicator={false}
       />
 
-      <TouchableOpacity style={styles.startGameContainer}>
+      <TouchableOpacity style={styles.startGameContainer} onPress={() => navigation.navigate("Game", {players: namesList})}>
           <Text style={styles.startGameText}>Start Game</Text>
           <AntDesign name="rocket1" size={50} color="black" />
       </TouchableOpacity>

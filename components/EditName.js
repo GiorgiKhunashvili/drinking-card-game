@@ -4,7 +4,7 @@ import { TextInput, View, Text, StyleSheet, Modal, Button, TouchableOpacity } fr
 
 const EditName = (props) => {
     const [name, setChangedName] = useState(props.name);
-    console.log(props.name)
+
     return (
         <Modal visible={props.visable} animationType="slide">
             <View style={styles.viewConainer}>
